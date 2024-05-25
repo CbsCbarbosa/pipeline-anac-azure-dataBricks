@@ -1,0 +1,56 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "Factory-Databricks-cbs"
+		},
+		"azureDatabricksanacconecction_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'azureDatabricksanacconecction'"
+		},
+		"azureDatabricksanacconecction_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0525-125607-xd5j3o6j"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "Factory-Databricks-cbs_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"azureDatabricksanacconecction_accessToken": {
+						"value": "[parameters('azureDatabricksanacconecction_accessToken')]"
+					},
+					"azureDatabricksanacconecction_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('azureDatabricksanacconecction_properties_typeProperties_existingClusterId')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
