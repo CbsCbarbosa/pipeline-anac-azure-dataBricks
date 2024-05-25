@@ -1,0 +1,9 @@
+{
+	"name": "Factory-Databricks-cbs",
+	"location": "eastus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "d1f475d6-7ee2-41b5-978e-213588ec0e51",
+		"tenantId": "b92af4f1-2e53-42b7-9689-95ee3073aa2b"
+	}
+}
